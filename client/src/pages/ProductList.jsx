@@ -7,15 +7,42 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useGetProductsQuery } from "../services/productApi";
 
 const ProductList = () => {
-  const { data: products = [], isLoading } = useGetProductsQuery();
+  const {
+    data: products = [],
+    isLoading,
+    isError,
+    error,
+  } = useGetProductsQuery();
 
-  if (isLoading) return <p className="text-center">Loading...</p>;
+  if (isLoading) {
+    return (
+      <div className="flex justify-center items-center h-screen">
+        <div className="animate-spin inline-block w-6 h-6 border-4 border-t-blue-600 rounded-full dark:border-t-blue-500"></div>
+        <span className="ml-3 text-blue-600 dark:text-blue-500"></span>
+      </div>
+    );
+  }
+
+  if (isError) {
+    return (
+      <div className="flex justify-center items-center h-screen flex-col">
+        <div className="text-red-600 text-xl font-semibold mb-2">
+          Ürünler yüklenirken bir hata oluştu.
+        </div>
+        <div className="text-gray-600 text-sm">
+          {error?.error ||
+            error?.data?.message ||
+            "Bilinmeyen bir hata oluştu."}
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="py-8 px-4 bg-gray-50">
       <div className="max-w-7xl mx-auto">
         <h2 className="text-center text-3xl font-semibold mb-8 text-gray-800">
-          Product List
+          Ürün Listesi
         </h2>
 
         <div className="relative">
