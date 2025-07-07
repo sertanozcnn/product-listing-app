@@ -4,7 +4,7 @@ const cors = require("cors");
 const productRoutes = require("./src/routes/productRoutes");
 
 const app = express();
-const PORT = process.env.PORT || 8800;
+const PORT = process.env.PORT || 5000;
 
 // Middleware
 app.use(express.json());
