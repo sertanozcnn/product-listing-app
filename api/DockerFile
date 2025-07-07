@@ -1,7 +1,19 @@
 FROM node:18
+
+# Uygulama dizinine geç
 WORKDIR /app
+
+# package.json ve package-lock.json dosyalarını kopyala
 COPY package*.json ./
+
+# Bağımlılıkları yükle
 RUN npm install
+
+# Kalan tüm dosyaları kopyala
 COPY . .
+
+# Uygulamanın çalışacağı portu belirt
 EXPOSE 5000
-CMD ["npm", "index.js"]
+
+# Sunucuyu başlat
+CMD ["node", "index.js"]
