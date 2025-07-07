@@ -1,4 +1,5 @@
-FROM node:20 AS build  # veya node:18 ile devam edeceksen npm upgrade satırını kaldır
+# 1. Build aşaması
+FROM node:20 AS build
 
 WORKDIR /app
 
@@ -10,6 +11,7 @@ COPY . .
 
 RUN npm run build
 
+# 2. Production aşaması
 FROM nginx:alpine
 
 COPY --from=build /app/build /usr/share/nginx/html
