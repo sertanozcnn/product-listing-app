@@ -7,10 +7,14 @@
 
 # testing
 /coverage
+# Environment variables
+.env
 
-# production
+# Compiled output
 /build
-
+/.next
+/.nuxt
+/dist
 # misc
 .DS_Store
 .env.local

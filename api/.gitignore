@@ -1,0 +1,30 @@
+# Dependency directories
+node_modules/
+
+# Environment variables
+.env
+
+# Runtime data
+*.log
+npm-debug.log*
+
+# Optional npm cache directory
+.npm
+
+# Dependency directories used by tools like linters
+/.pnp
+.pnp.js
+
+# Output of npm pack
+*.tgz
+
+# Yarn integrity file
+.yarn-integrity
+
+# dotenv environment variables file
+.env
+.env.test
+
+# IDEs
+.idea
+.vscode
