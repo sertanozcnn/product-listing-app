@@ -6,8 +6,8 @@ WORKDIR /app
 # package.json ve package-lock.json dosyalarını kopyala
 COPY package*.json ./
 
-# Bağımlılıkları yükle
-RUN npm install
+# Bağımlılıkları yükle --legacy-peer-deps ile
+RUN npm install --legacy-peer-deps
 
 # Tüm dosyaları kopyala
 COPY . .
