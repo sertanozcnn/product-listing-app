@@ -3,26 +3,26 @@ FROM node:18 AS build
 
 WORKDIR /app
 
-# package.json ve package-lock.json dosyalarını kopyala
 COPY package*.json ./
 
-# Bağımlılıkları yükle --legacy-peer-deps ile
+# npm'yi güncelle (opsiyonel ama önerilir)
+RUN npm install -g npm@11.4.2
+
+# Bağımlılıkları yükle, legacy-peer-deps kullanmaya devam edebilirsin
 RUN npm install --legacy-peer-deps
 
-# Tüm dosyaları kopyala
+# İstersen audit fix yapabilirsin (riskli, dikkatli ol)
+# RUN npm audit fix --force
+
 COPY . .
 
-# React uygulamasını build et
 RUN npm run build
 
 # 2. Production aşaması - nginx ile serve et
 FROM nginx:alpine
 
-# Build edilen dosyaları nginx klasörüne kopyala
 COPY --from=build /app/build /usr/share/nginx/html
 
-# Nginx port 80'i expose et
 EXPOSE 80
 
-# Nginx'i foreground modda başlat
 CMD ["nginx", "-g", "daemon off;"]
