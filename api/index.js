@@ -18,6 +18,16 @@ app.use("/api/products", productRoutes);
 // Ana route
 
 // Server başlatma
+const corsOptions = {
+  origin: "*", // veya sadece frontend URL'si (örneğin: "https://yourfrontend.com")
+  methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+  credentials: true, // Eğer kimlik doğrulama varsa
+  allowedHeaders: ["Content-Type", "Authorization"],
+};
+app.use(cors(corsOptions));
+app.get("/", (req, res) => {
+  res.send("Product API is running");
+});
 app.listen(PORT, () => {
   console.log(`API running at http://localhost:${PORT}`);
 });
