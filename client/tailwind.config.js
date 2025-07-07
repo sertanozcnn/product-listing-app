@@ -1,8 +1,45 @@
-/** @type {import('tailwindcss').Config} */
+// tailwind.config.js
 module.exports = {
   content: ["./src/**/*.{js,jsx,ts,tsx}"],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        avenirBlack: ["Avenir-Black"],
+        avenirBlackOblique: ["Avenir-BlackOblique"],
+        avenirHeavy: ["Avenir-Heavy"],
+        avenirHeavyOblique: ["Avenir-HeavyOblique"],
+        avenirMedium: ["Avenir-Medium"],
+        avenirMediumOblique: ["Avenir-MediumOblique"],
+        avenirBook: ["Avenir-Book"],
+        avenirBookOblique: ["Avenir-BookOblique"],
+        avenirRoman: ["Avenir-Roman"],
+        avenirOblique: ["Avenir-Oblique"],
+        avenirLight: ["Avenir-Light"],
+        avenirLightOblique: ["Avenir-LightOblique"],
+        montserratBlack: ["Montserrat-Black"],
+        montserratBlackItalic: ["Montserrat-BlackItalic"],
+        montserratExtraBold: ["Montserrat-ExtraBold"],
+        montserratExtraBoldItalic: ["Montserrat-ExtraBoldItalic"],
+        montserratBold: ["Montserrat-Bold"],
+        montserratBoldItalic: ["Montserrat-BoldItalic"],
+        montserratSemiBold: ["Montserrat-SemiBold"],
+        montserratSemiBoldItalic: ["Montserrat-SemiBoldItalic"],
+        montserratMedium: ["Montserrat-Medium"],
+        montserratMediumItalic: ["Montserrat-MediumItalic"],
+        montserratRegular: ["Montserrat-Regular"],
+        montserratItalic: ["Montserrat-Italic"],
+        montserratLight: ["Montserrat-Light"],
+        montserratLightItalic: ["Montserrat-LightItalic"],
+        montserratExtraLight: ["Montserrat-ExtraLight"],
+        montserratExtraLightItalic: ["Montserrat-ExtraLightItalic"],
+        montserratThin: ["Montserrat-Thin"],
+        montserratThinItalic: ["Montserrat-ThinItalic"],
+      },
+
+      colors: {
+        starIconColor: "#E6CA97",
+      },
+    },
   },
   plugins: [],
 };

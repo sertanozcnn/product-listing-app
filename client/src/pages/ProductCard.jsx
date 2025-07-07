@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { renderStars } from "../utils/renderStars";
 
 const colorMap = {
   yellow: "#E6CA97",
@@ -10,7 +11,7 @@ const ProductCard = ({ product }) => {
   const [color, setColor] = useState("yellow");
 
   return (
-    <div className="flex flex-col bg-white rounded-2xl shadow-lg hover:shadow-xl transition-shadow duration-300 p-6 w-full max-w-xs mx-auto border border-gray-100">
+    <div className="flex flex-col bg-white transition-shadow duration-300 p-12 w-full max-w-xs">
       <div className="w-full aspect-square overflow-hidden rounded-xl bg-gray-50">
         <img
           src={product.images[color]}
@@ -19,48 +20,40 @@ const ProductCard = ({ product }) => {
         />
       </div>
 
-      <h3 className="text-lg font-semibold mt-4 text-center text-gray-800">
+      <h3 className="text-base font-montserratMedium mt-4 text-left text-black">
         {product.name}
       </h3>
 
-      <p className="text-red-600 font-semibold text-base text-center mt-2">
+      <p className="text-black font-montserratRegular text-sm text-left mt-2">
         {product.price}
       </p>
 
-      <div className="flex justify-center gap-3 mt-4">
+      <div className="flex justify-left gap-3 mt-4">
         {Object.keys(product.images).map((c) => (
-          <button
+          <div
             key={c}
-            title={c}
-            className={`w-6 h-6 rounded-full border-2 transition-all duration-200 hover:scale-110 ${
-              color === c ? "border-black border-2" : "border-gray-300"
-            }`}
-            style={{ backgroundColor: colorMap[c] }}
             onClick={() => setColor(c)}
-          />
+            className={`rounded-full p-[3px] transition-all duration-200 cursor-pointer ${
+              color === c ? "border border-black" : "border border-transparent"
+            }`}
+          >
+            <div
+              className="w-5 h-5 rounded-full"
+              style={{ backgroundColor: colorMap[c] }}
+            />
+          </div>
         ))}
       </div>
 
-      <div className="text-center text-gray-500 text-sm mt-3 capitalize">
+      <div className="text-left text-black text-sm font-avenirBook mt-3 capitalize">
         {color} gold
       </div>
 
-      <div className="flex items-center justify-center gap-1 mt-2">
-        <div className="flex">
-          {[1, 2, 3, 4, 5].map((star) => (
-            <span
-              key={star}
-              className={`text-sm ${
-                star <= Math.floor(product.rating)
-                  ? "text-yellow-400"
-                  : "text-gray-300"
-              }`}
-            >
-              ⭐
-            </span>
-          ))}
-        </div>
-        <span className="text-sm text-gray-600 ml-1">{product.rating}</span>
+      <div className="flex items-center justify-left gap-1 mt-2">
+        <div className="flex">{renderStars(product.rating)}</div>
+        <span className="text-sm text-black font-avenirBook ml-1">
+          {product.rating}/5
+        </span>
       </div>
     </div>
   );
