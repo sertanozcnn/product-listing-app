@@ -7,15 +7,14 @@ const calculateProducts = async () => {
   const goldPrice = await getGoldPrice(); // örneğin 74.3
 
   return products.map((product) => {
-    const price = (
-      (product.popularityScore + 1) *
-      product.weight *
-      goldPrice
-    ).toFixed(2);
+    const numericPrice =
+      (product.popularityScore + 1) * product.weight * goldPrice;
+    const price = numericPrice.toFixed(2);
     const rating = (product.popularityScore * 5).toFixed(1);
 
     return {
       ...product,
+      numericPrice: Number(price),
       price: `$${price} USD`,
       rating: rating,
     };

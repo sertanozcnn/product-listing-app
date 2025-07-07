@@ -1,19 +1,23 @@
 import ProductCard from "./ProductCard";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation } from "swiper/modules";
+import { Navigation, Scrollbar } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
-
+import "swiper/css/scrollbar";
 import { useGetProductsQuery } from "../services/productApi";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
+import { useState } from "react";
+import SortDropdown from "../components/SortDropdown";
+
 const ProductList = () => {
+  const [sort, setSort] = useState("");
   const {
     data: products = [],
     isLoading,
     isError,
     error,
-  } = useGetProductsQuery();
+  } = useGetProductsQuery(sort);
 
   if (isLoading) {
     return (
@@ -42,16 +46,24 @@ const ProductList = () => {
   return (
     <div className="py-16 px-4 bg-gray-50">
       <div className="max-w-7xl mx-auto">
-        <h2 className="text-center text-3xl font-avenirBook mb-8 text-black">
+        <h2 className="text-center text-4xl font-avenirBook mb-8 text-black">
           Ürün Listesi
         </h2>
 
+        <div className="flex justify-end mb-6">
+          <SortDropdown sort={sort} setSort={setSort} />
+        </div>
         <div className="relative">
           <Swiper
-            modules={[Navigation]}
+            modules={[Navigation, Scrollbar]}
             navigation={{
               prevEl: ".custom-prev",
               nextEl: ".custom-next",
+            }}
+            scrollbar={{
+              el: ".custom-scrollbar",
+              draggable: true,
+              hide: false,
             }}
             spaceBetween={0}
             slidesPerView={4}
@@ -78,6 +90,11 @@ const ProductList = () => {
           <button className="custom-next absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 z-10 bg-white rounded-full p-3 shadow-lg hover:shadow-xl transition-all duration-200 hover:scale-110">
             <ChevronRightIcon className="w-6 h-6 text-gray-600" />
           </button>
+
+          {/* Scrollbar Container */}
+          <div className="custom-scrollbar mt-6 mx-1 h-3 bg-gray-200 rounded-full overflow-hidden">
+            <div className="swiper-scrollbar-drag bg-gray-500 h-full rounded-full"></div>
+          </div>
         </div>
       </div>
     </div>
