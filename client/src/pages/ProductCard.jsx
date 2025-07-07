@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { renderStars } from "../utils/renderStars";
+import { useTranslation } from "react-i18next";
 
 const colorMap = {
   yellow: "#E6CA97",
@@ -9,6 +10,7 @@ const colorMap = {
 
 const ProductCard = ({ product }) => {
   const [color, setColor] = useState("yellow");
+  const { t } = useTranslation();
 
   return (
     <div className="flex flex-col bg-white transition-shadow duration-300 p-12 w-full max-w-xs">
@@ -46,7 +48,7 @@ const ProductCard = ({ product }) => {
       </div>
 
       <div className="text-left text-black text-sm font-avenirBook mt-3 capitalize">
-        {color} gold
+        {t(color)} {t("gold")}
       </div>
 
       <div className="flex items-center justify-left gap-1 mt-2">

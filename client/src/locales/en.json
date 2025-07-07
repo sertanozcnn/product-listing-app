@@ -1,0 +1,18 @@
+{
+  "productListTitle": "Product List",
+  "errorFetchingProducts": "An error occurred while loading products.",
+  "priceLabel": "Price",
+  "ratingLabel": "Rating",
+  "languageLabel": "Language",
+  "currencyUSD": "USD",
+  "currencyTRY": "TRY",
+  "yellow": "Yellow",
+  "white": "White",
+  "rose": "Rose",
+  "gold": "Gold",
+  "defaultSort": "Default Sorting",
+  "priceAsc": "Price (Ascending)",
+  "priceDesc": "Price (Descending)",
+  "ratingAsc": "Rating (Ascending)",
+  "ratingDesc": "Rating (Descending)"
+}

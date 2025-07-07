@@ -1,22 +1,24 @@
 const products = require("../data/productModel.json");
+const { getExchangeRate } = require("./exchangeService.js");
 const { getGoldPrice } = require("./goldService.js");
 
 //Dinamik Fiyat Hesaplamasını Yapıyoruz
 //Fiyat = (popülerlikPuanı + 1) * ağırlık * altınFiyatı
-const calculateProducts = async () => {
-  const goldPrice = await getGoldPrice(); // örneğin 74.3
-
+const calculateProducts = async (currency = "USD") => {
+  const goldPriceUSD = await getGoldPrice();
+  const exchangeRate = await getExchangeRate("USD", currency);
   return products.map((product) => {
-    const numericPrice =
-      (product.popularityScore + 1) * product.weight * goldPrice;
-    const price = numericPrice.toFixed(2);
-    const rating = (product.popularityScore * 5).toFixed(1);
+    const priceInUSD =
+      (product.popularityScore + 1) * product.weight * goldPriceUSD;
+    const convertedPrice = priceInUSD * exchangeRate;
+    const priceFixed = convertedPrice.toFixed(2);
 
     return {
       ...product,
-      numericPrice: Number(price),
-      price: `$${price} USD`,
-      rating: rating,
+      numericPrice: Number(priceFixed),
+      price:
+        currency === "USD" ? `$${priceFixed} USD` : `${priceFixed} ${currency}`,
+      rating: (product.popularityScore * 5).toFixed(1),
     };
   });
 };

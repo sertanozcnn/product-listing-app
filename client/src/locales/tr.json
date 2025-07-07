@@ -1,0 +1,18 @@
+{
+  "productListTitle": "Ürün Listesi",
+  "errorFetchingProducts": "  Ürünler yüklenirken bir hata oluştu.",
+  "priceLabel": "Fiyat",
+  "ratingLabel": "Değerlendirme",
+  "languageLabel": "Dil",
+  "currencyUSD": "USD",
+  "currencyTRY": "TRY",
+  "yellow": "Sarı",
+  "white": "Beyaz",
+  "rose": "Pembe",
+  "gold": "Altın",
+  "defaultSort": "Varsayılan Sıralama",
+  "priceAsc": "Fiyat (Artan)",
+  "priceDesc": "Fiyat (Azalan)",
+  "ratingAsc": "Puan (Artan)",
+  "ratingDesc": "Puan (Azalan)"
+}

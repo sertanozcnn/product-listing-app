@@ -7,17 +7,27 @@ import "swiper/css/scrollbar";
 import { useGetProductsQuery } from "../services/productApi";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import SortDropdown from "../components/SortDropdown";
+import { useTranslation } from "react-i18next";
+import LanguageDropdown from "../components/LanguageDropdown";
 
-const ProductList = () => {
+const ProductList = ({ lang, setLang, currency }) => {
+  const { t, i18n } = useTranslation();
+
   const [sort, setSort] = useState("");
   const {
     data: products = [],
     isLoading,
     isError,
     error,
-  } = useGetProductsQuery(sort);
+    refetch,
+  } = useGetProductsQuery({ sort, lang, currency });
+
+  useEffect(() => {
+    i18n.changeLanguage(lang);
+    refetch();
+  }, [lang, currency, sort, refetch, i18n]);
 
   if (isLoading) {
     return (
@@ -32,7 +42,7 @@ const ProductList = () => {
     return (
       <div className="flex justify-center items-center h-screen flex-col">
         <div className="text-red-600 text-xl font-semibold mb-2">
-          Ürünler yüklenirken bir hata oluştu.
+          {t("errorFetchingProducts")}
         </div>
         <div className="text-gray-600 text-sm">
           {error?.error ||
@@ -47,10 +57,12 @@ const ProductList = () => {
     <div className="py-16 px-4 bg-gray-50">
       <div className="max-w-7xl mx-auto">
         <h2 className="text-center text-4xl font-avenirBook mb-8 text-black">
-          Ürün Listesi
+          {t("productListTitle")}
         </h2>
 
-        <div className="flex justify-end mb-6">
+        <div className="flex justify-between mb-6 items-center gap-4">
+          <LanguageDropdown lang={lang} setLang={setLang} />
+
           <SortDropdown sort={sort} setSort={setSort} />
         </div>
         <div className="relative">
@@ -82,7 +94,6 @@ const ProductList = () => {
             ))}
           </Swiper>
 
-          {/* Custom Navigation Buttons */}
           <button className="custom-prev absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 z-10 bg-white rounded-full p-3 shadow-lg hover:shadow-xl transition-all duration-200 hover:scale-110">
             <ChevronLeftIcon className="w-6 h-6 text-gray-600" />
           </button>
@@ -91,7 +102,6 @@ const ProductList = () => {
             <ChevronRightIcon className="w-6 h-6 text-gray-600" />
           </button>
 
-          {/* Scrollbar Container */}
           <div className="custom-scrollbar mt-6 mx-1 h-3 bg-gray-200 rounded-full overflow-hidden">
             <div className="swiper-scrollbar-drag bg-gray-500 h-full rounded-full"></div>
           </div>

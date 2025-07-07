@@ -7,7 +7,6 @@ export function renderStars(rating) {
 
   for (let i = 1; i <= 5; i++) {
     if (i <= fullStars) {
-      // Full star
       stars.push(
         <StarIcon
           key={i}
@@ -15,7 +14,6 @@ export function renderStars(rating) {
         />
       );
     } else if (i === fullStars + 1 && decimal >= 0.25 && decimal < 0.75) {
-      // Half star effect using CSS clip-path
       stars.push(
         <div key={i} className="relative">
           <StarIcon className="w-4 h-4 text-gray-300 fill-gray-300 mb-2" />
@@ -28,7 +26,6 @@ export function renderStars(rating) {
         </div>
       );
     } else if (i === fullStars + 1 && decimal >= 0.75) {
-      // Round up to full star
       stars.push(
         <StarIcon
           key={i}
@@ -36,7 +33,6 @@ export function renderStars(rating) {
         />
       );
     } else {
-      // Empty star
       stars.push(
         <StarIcon
           key={i}

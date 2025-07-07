@@ -1,14 +1,22 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
+const baseUrl =
+  process.env.REACT_APP_BACKEND_API_URL || "http://localhost:8800/api/";
+
 export const productApi = createApi({
   reducerPath: "productApi",
-  baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:8800/api/" }),
+  baseQuery: fetchBaseQuery({ baseUrl }),
   endpoints: (builder) => ({
     getProducts: builder.query({
-      query: (sort) => {
-        return sort ? `products?sort=${sort}` : "products";
+      query: ({ sort, lang, currency }) => {
+        let url = "products?";
+        if (sort) url += `sort=${sort}&`;
+        if (lang) url += `lang=${lang}&`;
+        if (currency) url += `currency=${currency}&`;
+        return url.slice(0, -1);
       },
     }),
   }),
 });
+
 export const { useGetProductsQuery } = productApi;

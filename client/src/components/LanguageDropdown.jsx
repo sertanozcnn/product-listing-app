@@ -1,32 +1,27 @@
 import { useState } from "react";
-import { useTranslation } from "react-i18next";
 
-const SortDropdown = ({ sort, setSort }) => {
-  const { t } = useTranslation();
+const LanguageDropdown = ({ lang, setLang }) => {
   const [open, setOpen] = useState(false);
 
   const options = [
-    { value: "", label: t("defaultSort") },
-    { value: "price_asc", label: t("priceAsc") },
-    { value: "price_desc", label: t("priceDesc") },
-    { value: "rating_asc", label: t("ratingAsc") },
-    { value: "rating_desc", label: t("ratingDesc") },
+    { value: "en", label: "English" },
+    { value: "tr", label: "Turkish" },
   ];
 
+  const selectedOption =
+    options.find((o) => o.value === lang)?.label || "Select";
+
   const handleSelect = (value) => {
-    setSort(value);
+    setLang(value);
     setOpen(false);
   };
-
-  const selectedOption =
-    options.find((o) => o.value === sort)?.label || options[0].label;
 
   return (
     <div className="relative inline-block text-left">
       <div>
         <button
           onClick={() => setOpen(!open)}
-          className="inline-flex justify-between w-56 rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50"
+          className="inline-flex justify-between w-32 rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50"
         >
           {selectedOption}
           <svg
@@ -47,7 +42,7 @@ const SortDropdown = ({ sort, setSort }) => {
       </div>
 
       {open && (
-        <ul className="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none z-20">
+        <ul className="origin-top-right absolute right-0 mt-2 w-32 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none z-20">
           {options.map((option) => (
             <li
               key={option.value}
@@ -63,4 +58,4 @@ const SortDropdown = ({ sort, setSort }) => {
   );
 };
 
-export default SortDropdown;
+export default LanguageDropdown;
